@@ -15,4 +15,4 @@ RUN apt-get install -y git
 RUN mkdir ~/datastreamenv
 RUN git clone https://github.com/famersbs/datastream_environment_test.git ~/datastreamenv/
 
-RUN ll ~/datastreamenv
+RUN ls ~/datastreamenv
