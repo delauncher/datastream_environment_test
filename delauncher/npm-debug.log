@@ -1,21 +1,18 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'start', './' ]
 2 info using npm@1.4.28
-3 info using node@v0.10.36
-4 error install Couldn't read dependencies
-5 error Failed to parse json
-5 error Unexpected token /
-6 error File: /Users/SeoByeongSeon/project/datastream_environment/datastream_environment_test/delauncher/package.json
-7 error Failed to parse package.json data.
-7 error package.json must be actual JSON, not just JavaScript.
-7 error
-7 error This is not a bug in npm.
-7 error Tell the package author to fix their package.json file. JSON.parse
-8 error System Darwin 14.5.0
-9 error command "node" "/usr/local/bin/npm" "install"
-10 error cwd /Users/SeoByeongSeon/project/datastream_environment/datastream_environment_test/delauncher
-11 error node -v v0.10.36
-12 error npm -v 1.4.28
-13 error file /Users/SeoByeongSeon/project/datastream_environment/datastream_environment_test/delauncher/package.json
-14 error code EJSONPARSE
-15 verbose exit [ 1, true ]
+3 info using node@v0.10.40
+4 verbose node symlink /usr/bin/node
+5 error Error: ENOENT, open '/home/datastreamenv/datastreamenv/delauncher/node_modules/package.json'
+6 error If you need help, you may report this *entire* log,
+6 error including the npm and node versions, at:
+6 error     <http://github.com/npm/npm/issues>
+7 error System Linux 3.19.0-25-generic
+8 error command "/usr/bin/node" "/usr/bin/npm" "start" "./"
+9 error cwd /home/datastreamenv/datastreamenv/delauncher
+10 error node -v v0.10.40
+11 error npm -v 1.4.28
+12 error path /home/datastreamenv/datastreamenv/delauncher/node_modules/package.json
+13 error code ENOENT
+14 error errno 34
+15 verbose exit [ 34, true ]

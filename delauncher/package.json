@@ -9,10 +9,10 @@
   }],
 
   "bin": {
-    "module-name": "./bin/module-name"
+    "module-name": "app.js"
   },
 
-  "main": "lib/foo.js",
+  "main": "./app.js",
 
   "keywords": [
     "nodejitsu",

@@ -11,8 +11,15 @@ mv /opt/zookeeper-3.4.6 /opt/zookeeper
 # install Git
 RUN apt-get install -y git
 
+# install Node
+RUN curl -sL https://deb.nodesource.com/setup | sudo bash -
+RUN apt-get install -y build-essential
+RUN apt-get install -y nodejs
+#RUN apt-get install npm
+
 # check out project
 RUN mkdir ~/datastreamenv
 RUN git clone https://github.com/famersbs/datastream_environment_test.git ~/datastreamenv/
 
-RUN ls ~/datastreamenv
+
+#RUN ls ~/datastreamenv
