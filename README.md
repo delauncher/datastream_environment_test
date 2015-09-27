@@ -76,7 +76,32 @@
 * Todo
 
 	1. Prepare Main Machine
-		: 기본 환경 설정 ( SSH, Etc... )
-		: Docker 설치 
+		V : 우분투 이미지 제공 ( 14.04 )
+			-> datastreamenv / datastreamenv1234
 
-	2. Make Sample Shell
+		V : 기본 환경 설정 ( SSH, Etc... )
+			-> update
+				: sudo apt-get update
+
+			-> git
+				: sudo apt-get install git
+
+		V : Docker 설치 
+
+	2. Make Sample Script for DockerImage
+		: zookeeper docker image
+			-> based docker image -> ubuntu 14.04
+				: 참고
+				: https://hub.docker.com/r/mesoscloud/zookeeper/~/dockerfile/
+			-> after configuration
+				: /etc/zookeeper/conf/myid		-> 호스트 명에 맞게 설정
+				: /etc/zookeeper/conf/zoo.cfg 	-> 서버 리스트 및 IP포트 설정
+				: Zookeeper Start
+
+
+
+
+
+!!! 참고 문헌
+	: http://pyrasis.com/book/DockerForTheReallyImpatient/Chapter13/04
+		-> docker hub auto build
