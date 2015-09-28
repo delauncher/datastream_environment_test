@@ -1,0 +1,32 @@
+{
+  "name": "delauncher",
+  "version": "0.0.1",
+  "description": "datastream launcher",
+  "author": "Sean <famersbs@gmail.com>",
+  "contributors": [{
+    "name": "Foo Bar",
+    "email": "foo.bar@example.com"
+  }],
+
+  "bin": {
+    "module-name": "./bin/module-name"
+  },
+
+  "main": "lib/foo.js",
+
+  "keywords": [
+    "nodejitsu",
+    "example",
+    "browsenpm"
+  ],
+
+  "dependencies": {
+  },
+
+  "devDependencies": {
+  },
+
+  "preferGlobal": true,
+  "analyze": true,
+  "license": "MIT"
+}
