@@ -7,7 +7,9 @@ util.writeFileSync_overwrrite = function( path, data ){
         if( fs.existsSync( path + '.tmp' ) ) {
                 fs.unlinkSync( path + '.tmp' );
         }
-        fs.renameSync( path, path + '.tmp' );
+	if( fs.existsSync( path ) ){
+        	fs.renameSync( path, path + '.tmp' );
+	}
         fs.writeFileSync( path, data, 'utf8' );
 };
 
