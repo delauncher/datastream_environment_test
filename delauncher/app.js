@@ -69,7 +69,6 @@ var step_set_hosts = function(){
 		var server = env.servers[idx];
 		addstr = addstr + server.domain + '\t' + server.ip + '\n';
 	}
-
 		// make hosts file
 	var hosts = fs.readFileSync( "/etc/hosts", "utf8" );
 
@@ -87,15 +86,20 @@ var step_set_hosts = function(){
 
 		// write to hosts
 	util.writeFileSync_overwrrite( '/etc/hosts', hosts );
-/*
-	if( fs.existsSync('/etc/hosts.tmp' ) ) {
-		fs.unlinkSync( '/etc/hosts.tmp' );
-	}
-	fs.renameSync( '/etc/hosts', '/etc/hosts.tmp' );
-	fs.writeFileSync('/etc/hosts', hosts, 'utf8' );	
-*/
 };
-step_set_hosts();
+
+var step_set_dns = function(){
+
+	var hosts = "";
+	for( var idx in  env.servers ){
+                var server = env.servers[idx];
+                hosts = hosts + "address=/" server.domain + '/' + server.ip + '\n';
+        }
+
+	util.writeFileSync_overwrrite( '/etc/dnsmasq.d/0hosts', hosts );
+
+};
+step_set_dns();
 
 // Step 2. specific env
 env.instances.filter = function( fn_filter ){
