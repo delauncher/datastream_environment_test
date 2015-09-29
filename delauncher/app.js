@@ -93,7 +93,7 @@ var step_set_dns = function(){
 	var hosts = "";
 	for( var idx in  env.servers ){
                 var server = env.servers[idx];
-                hosts = hosts + "address=/" server.domain + '/' + server.ip + '\n';
+                hosts = hosts + "address=/" + server.domain + '/' + server.ip + '\n';
         }
 
 	util.writeFileSync_overwrrite( '/etc/dnsmasq.d/0hosts', hosts );
