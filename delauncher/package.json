@@ -15,12 +15,11 @@
   "main": "./app.js",
 
   "keywords": [
-    "nodejitsu",
-    "example",
-    "browsenpm"
+    "delauncher"
   ],
 
   "dependencies": {
+    "envs":"*"
   },
 
   "devDependencies": {
