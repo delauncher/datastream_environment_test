@@ -19,7 +19,10 @@
   ],
 
   "dependencies": {
-    "envs":"*"
+    "envs":"*",
+    "mkdirp":"*",
+    "sync-exec":"*",
+    "node-zookeeper-client":"*"
   },
 
   "devDependencies": {
@@ -27,5 +30,9 @@
 
   "preferGlobal": true,
   "analyze": true,
-  "license": "MIT"
+  "license": "MIT",
+
+  "scripts": {
+    "start":"app.js"
+  }
 }

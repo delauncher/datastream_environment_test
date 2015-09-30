@@ -1,29 +1,28 @@
 var envs = require('envs');
 
-
-// Parse Env and 
-console.log( "Run Environments-----------------------------");
-console.log( "	INSTANCE_ID" , envs('INSTANCE_ID') );
-console.log( "	CONFIG_FILE_PATH " , envs('CONFIG_FILE_PATH') );
-console.log( "---------------------------------------------");
-
-console.log( "Parameters -----------------------------");
-console.log( "	Run Type :" , process.argv[2] );
-console.log( "	Instance ID or Server ID :" , process.argv[3] );
-console.log( "	Main Config File Path :" , process.argv[4] );
-console.log( "---------------------------------------------");
-
-
 var exports = module.exports = {
 		servers : [
 			{
 				domain: 'server_01',
-				ip: '172.17.42.1'
+				ip: '172.17.42.1',
+				source_path: '~/datastreamenv',
+				datastore_path: '~/tmp',
+				log_path: '~/tmp/logs'
 			},
-	                {
-	                        domain: 'server_02',
-	                        ip: '172.17.42.1'
-	                },
+            {
+                domain: 'server_02',
+                ip: '172.17.42.1',
+                source_path: '~/datastreamenv',
+				datastore_path: '~/tmp',
+				log_path: '~/tmp/logs'
+            },
+            {
+                domain: 'server_03',
+                ip: '172.17.42.1',
+                source_path: '~/datastreamenv',
+				datastore_path: '~/tmp',
+				log_path: '~/tmp/logs'
+            },
 
 		],
 		instances : [
@@ -31,6 +30,7 @@ var exports = module.exports = {
 				id: 'zookeeper_1',
 				type: 'zookeeper',
 				target: 'server_01',
+				docker_img: 'famersbs/zookeeper',
 				options:{
 					serverNum:1,
 					dataDir: '/tmp/zookeeper',
@@ -40,17 +40,31 @@ var exports = module.exports = {
 				}
 			},
 	 		{
-	                        id: 'zookeeper_2',
-	                        type: 'zookeeper',
-	                        target: 'server_02',
-	                        options:{
+                id: 'zookeeper_2',
+                type: 'zookeeper',
+                target: 'server_02',
+                docker_img: 'famersbs/zookeeper',
+                options:{
 					serverNum:2,
-	                                dataDir: '/tmp/zookeeper',
-	                                firstPort:2881,
-	                                secondPort:3881,
-	                                clientPort:2182
-	                        }
-	                },
+                    dataDir: '/tmp/zookeeper',
+                    firstPort:2881,
+                    secondPort:3881,
+                    clientPort:2182
+            	}
+	        },
+	        {
+                id: 'zookeeper_3',
+                type: 'zookeeper',
+                target: 'server_03',
+                docker_img: 'famersbs/zookeeper',
+                options:{
+					serverNum:3,
+                    dataDir: '/tmp/zookeeper',
+                    firstPort:2882,
+                    secondPort:3882,
+                    clientPort:2183
+            	}
+	        },
 		],
 		
 	};
