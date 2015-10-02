@@ -102,6 +102,56 @@
 
 
 
+
+
+*** 인스턴스 실행기가 도커를 띄울 때 사용하는 옵션들
+
+sudo docker run -i -t --dns=127.0.0.1 35a5e6e6e8e6
+
+-d --name=[instance_id]
+
+--add-host server_01:127.0.0.1
+--add-host server_02:127.0.0.1
+
+-v ~/tmp/server_01:/tmp/zookeeper
+-v ~/datastreamenv:/opt/delauncher
+
+-p 2880:2880
+-p 3880:3880
+-p 2181:2181
+
+-e INSTANCE_ID=zookeeper_1 
+-e CONFIG_FILE_PATH=/tmp/de_conf/config.js
+-e NODE_PATH
+
+sudo docker run -i -t -h  --add-host server_01:172.17.42.1 --add-host server_02:172.17.42.1 -v ~/tmp/server_01:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_1 35a5e6e6e8e6
+
+
+sudo docker run -d -h server_01 --add-host server_02:172.17.42.1 -v ~/tmp/server_01:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_1 -e CONFIG_FILE_PATH=null -p 2880:2880 -p 3880:3880 -p 2181:2181 35a5e6e6e8e6 sh /opt/delauncher/config/run.sh
+
+sudo docker run -it -h server_02 --add-host server_01:172.17.42.1 -v ~/tmp/server_02:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_2 -e CONFIG_FILE_PATH=null -p 2881:2881 -p 3881:3881 -p 2182:2182 35a5e6e6e8e6 sh /opt/delauncher/config/run.sh
+
+** 이미지 내부에 있는 스크립트 ( 고정 )
+run.sh
+	# node app.js $INSTANCE_ID $CONFIG_FILE_PATH
+
+
+
+!!! dnsmasq 설정 ( docker에서 도메인 처리 할때 사용할 수 있는 방법)
+	!!! 일단은 사용하지 않음 
+apt-get install -y dnsmasq
+
+RUN echo 'address="/dbhost/127.0.0.1"' >> /etc/dnsmasq.d/0hosts
+
+RUN echo 'listen-address=127.0.0.1' >> /etc/dnsmasq.conf
+RUN echo 'resolv-file=/etc/resolv.dnsmasq.conf' >> /etc/dnsmasq.conf
+RUN echo 'conf-dir=/etc/dnsmasq.d' >> /etc/dnsmasq.conf
+RUN echo 'nameserver 8.8.8.8' >> /etc/resolv.dnsmasq.conf
+RUN echo 'nameserver 8.8.4.4' >> /etc/resolv.dnsmasq.conf
+RUN echo 'user=root' >> /etc/dnsmasq.conf
+
+service dnsmasq start
+
 !!! 참고 문헌
 	: http://pyrasis.com/book/DockerForTheReallyImpatient/Chapter13/04
 		-> docker hub auto build

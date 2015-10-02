@@ -28,3 +28,4 @@
 	sudo docker login
 	sudo docker pull sequenceiq/spark:1.4.0
 
+
