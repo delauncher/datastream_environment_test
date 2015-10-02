@@ -126,10 +126,22 @@ sudo docker run -i -t --dns=127.0.0.1 35a5e6e6e8e6
 
 sudo docker run -i -t -h  --add-host server_01:172.17.42.1 --add-host server_02:172.17.42.1 -v ~/tmp/server_01:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_1 35a5e6e6e8e6
 
+------------------------------------------------------------
+	test script
+------------------------------------------------------------
+sudo docker run -d -h server_01 --add-host server_02:172.17.42.1 -v ~/tmp/server_01:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_1 -e CONFIG_FILE_PATH=null -p 2880:2880 -p 3880:3880 -p 2181:2181 fa3d7ef2adce sh /run.sh
 
-sudo docker run -d -h server_01 --add-host server_02:172.17.42.1 -v ~/tmp/server_01:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_1 -e CONFIG_FILE_PATH=null -p 2880:2880 -p 3880:3880 -p 2181:2181 35a5e6e6e8e6 sh /opt/delauncher/config/run.sh
+sudo docker run -i -t -h server_02 --add-host server_01:172.17.42.1 -v ~/tmp/server_02:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_2 -e CONFIG_FILE_PATH=null -p 2881:2881 -p 3881:3881 -p 2182:2182 fa3d7ef2adce sh /run.sh
+------------------------------------------------------------
 
-sudo docker run -it -h server_02 --add-host server_01:172.17.42.1 -v ~/tmp/server_02:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_2 -e CONFIG_FILE_PATH=null -p 2881:2881 -p 3881:3881 -p 2182:2182 35a5e6e6e8e6 sh /opt/delauncher/config/run.sh
+------------------------------------------------------------
+	From Docker hub
+------------------------------------------------------------
+sudo docker run -d -h server_01 --add-host server_02:172.17.42.1 -v ~/tmp/server_01:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_1 -e CONFIG_FILE_PATH=null -p 2880:2880 -p 3880:3880 -p 2181:2181 famersbs/zookeeper sh /run.sh
+
+sudo docker run -i -t -h server_02 --add-host server_01:172.17.42.1 -v ~/tmp/server_02:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_2 -e CONFIG_FILE_PATH=null -p 2881:2881 -p 3881:3881 -p 2182:2182 famersbs/zookeeper sh /run.sh
+------------------------------------------------------------
+
 
 ** 이미지 내부에 있는 스크립트 ( 고정 )
 run.sh
