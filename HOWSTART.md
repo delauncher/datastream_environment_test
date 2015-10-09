@@ -8,18 +8,15 @@ You can use your own server or Virtual Box image.
 
 ### Install Docker
 
-'''
+	<pre>
+	$ sudo apt-get update
+	$ sudo apt-get install -y docker.io
 
-$ sudo apt-get update
-$ sudo apt-get install -y docker.io
-
-$ sudo service docker.io restart
-
-'''
+	$ sudo service docker.io restart
+	</pre>
 
 ### Install Node.js
 
-'''
 
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 apt-get install -y build-essential
