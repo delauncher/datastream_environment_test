@@ -23,6 +23,13 @@ var exports = module.exports = {
 				datastore_path: '~/tmp',
 				log_path: '~/tmp/logs'
             },
+            {
+                domain: 'server_04',
+                ip: '172.17.42.1',
+                source_path: '~/datastreamenv',
+				datastore_path: '~/tmp',
+				log_path: '~/tmp/logs'
+            },
 
 		],
 		instances : [
@@ -65,6 +72,15 @@ var exports = module.exports = {
                     clientPort:2183
             	}
 	        },
+	        {
+	        	id: 'kafka_1',
+	        	type: 'kafka',
+	        	target: 'server_04',
+	        	docker_img: 'famersbs/kafka',
+	        	broker_id; 0,
+	        	clientPort: 9092,
+	        	logDir: '/tmp/kafka/log'
+	        }
 		],
 		
 	};
