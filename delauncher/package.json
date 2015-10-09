@@ -22,7 +22,8 @@
     "envs":"*",
     "mkdirp":"*",
     "sync-exec":"*",
-    "node-zookeeper-client":"*"
+    "node-zookeeper-client":"*",
+    "sleep":"*"
   },
 
   "devDependencies": {

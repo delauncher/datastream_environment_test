@@ -26,7 +26,8 @@ var LauncherManager = require("./launcher/launcher.js" );
 // Main Config Loader
 var env = require("./common/config_loader.js");
 
-if( "server" == env.RUN_TYPE ){
+if( "server" == env.RUN_TYPE || 
+	"server_only_cmd" == env.RUN_TYPE ){
 
 	// Find Server
 	var cur_server;
@@ -82,7 +83,9 @@ if( "server" == env.RUN_TYPE ){
 
 		console.log( "Execute : ", idx );
 		console.log( launchers[idx].getExecuteCmd() );
-		execSync( launchers[idx].getExecuteCmd() );
+		if( "server_only_cmd" != env.RUN_TYPE ){
+			execSync( launchers[idx].getExecuteCmd() );
+		}
 
 	}
 
@@ -95,6 +98,19 @@ if( "server" == env.RUN_TYPE ){
 
 		// Load Launch and setup environment
 	LauncherManager.get( cur_instance.type ).run( cur_instance, env  );
+
+} else if( "stop_servers" == env.RUN_TYPE ){
+	// find instances
+	for( var idx in env.instances ){
+		var instance = env.instances[idx];
+		var add_cmd_per_instance = "";
+
+		if( instance.target == env.SERVER_ID ){
+			console.log( "Stop : ", instance.id );
+			execSync( "sudo docker kill " + instance.id );
+			execSync( "sudo docker rm " + instance.id );
+		}
+	}
 
 } else if( "zookeeper_test" == env.RUN_TYPE ){
 	require("./tester/zookeeper_tester.js").test();

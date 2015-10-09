@@ -3,28 +3,28 @@ var envs = require('envs');
 var exports = module.exports = {
 		servers : [
 			{
-				domain: 'server_01',
+				domain: 'server01',
 				ip: '172.17.42.1',
 				source_path: '~/datastreamenv',
 				datastore_path: '~/tmp',
 				log_path: '~/tmp/logs'
 			},
             {
-                domain: 'server_02',
+                domain: 'server02',
                 ip: '172.17.42.1',
                 source_path: '~/datastreamenv',
 				datastore_path: '~/tmp',
 				log_path: '~/tmp/logs'
             },
             {
-                domain: 'server_03',
+                domain: 'server03',
                 ip: '172.17.42.1',
                 source_path: '~/datastreamenv',
 				datastore_path: '~/tmp',
 				log_path: '~/tmp/logs'
             },
             {
-                domain: 'server_04',
+                domain: 'server04',
                 ip: '172.17.42.1',
                 source_path: '~/datastreamenv',
 				datastore_path: '~/tmp',
@@ -36,7 +36,7 @@ var exports = module.exports = {
 			{
 				id: 'zookeeper_1',
 				type: 'zookeeper',
-				target: 'server_01',
+				target: 'server01',
 				docker_img: 'famersbs/zookeeper',
 				options:{
 					serverNum:1,
@@ -49,7 +49,7 @@ var exports = module.exports = {
 	 		{
                 id: 'zookeeper_2',
                 type: 'zookeeper',
-                target: 'server_02',
+                target: 'server02',
                 docker_img: 'famersbs/zookeeper',
                 options:{
 					serverNum:2,
@@ -62,7 +62,7 @@ var exports = module.exports = {
 	        {
                 id: 'zookeeper_3',
                 type: 'zookeeper',
-                target: 'server_03',
+                target: 'server03',
                 docker_img: 'famersbs/zookeeper',
                 options:{
 					serverNum:3,
@@ -75,12 +75,78 @@ var exports = module.exports = {
 	        {
 	        	id: 'kafka_1',
 	        	type: 'kafka',
-	        	target: 'server_04',
+	        	target: 'server01',
 	        	docker_img: 'famersbs/kafka',
-	        	broker_id; 0,
+	        	//docker_img: '7cd5d2131383',
+	        	broker_id: 0,
 	        	clientPort: 9092,
 	        	logDir: '/tmp/kafka/log'
-	        }
+	        },
+	        {
+	        	id: 'kafka_2',
+	        	type: 'kafka',
+	        	target: 'server02',
+	        	docker_img: 'famersbs/kafka',
+	        	//docker_img: '7cd5d2131383',
+	        	broker_id: 1,
+	        	clientPort: 9093,
+	        	logDir: '/tmp/kafka/log'
+	        },
+	        {
+	        	id: 'kafka_3',
+	        	type: 'kafka',
+	        	target: 'server03',
+	        	docker_img: 'famersbs/kafka',
+	        	//docker_img: '7cd5d2131383',
+	        	broker_id: 2,
+	        	clientPort: 9094,
+	        	logDir: '/tmp/kafka/log'
+	        },
+	        {
+	        	id: 'spark_1',
+	        	type: 'spark',
+	        	target: 'server01',
+	        	//docker_img: 'famersbs/spark',
+	        	docker_img: 'e92cff63ee46',
+	        	masterPort: 7071,
+	        	masterWebPort: 8081,
+	        	workerPort:	9081,
+	        	//workerCount: 1,
+	        	useZookeeper: true,
+	        	//workerMemory:'1g',
+	        	//workerCores:1,
+	        	dataDir: '/tmp/spark'
+	        },
+	        {
+	        	id: 'spark_2',
+	        	type: 'spark',
+	        	target: 'server02',
+	        	//docker_img: 'famersbs/spark',
+	        	docker_img: 'e92cff63ee46',
+	        	masterPort: 7072,
+	        	masterWebPort: 8082,
+	        	workerPort:	9082,
+	        	//workerCount: 1,
+	        	useZookeeper: true,
+	        	//workerMemory:'1g',
+	        	//workerCores:1,
+	        	dataDir: '/tmp/spark'
+	        },
+	        {
+	        	id: 'spark_3',
+	        	type: 'spark',
+	        	target: 'server03',
+	        	//docker_img: 'famersbs/spark',
+	        	docker_img: 'e92cff63ee46',
+	        	masterPort: 7073,
+	        	masterWebPort: 8083,
+	        	workerPort:	9083,
+	        	//workerCount: 1,
+	        	useZookeeper: true,
+	        	//workerMemory:'1g',
+	        	//workerCores:1,
+	        	dataDir: '/tmp/spark'
+	        },
 		],
 		
 	};
