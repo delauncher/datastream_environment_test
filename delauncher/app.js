@@ -1,7 +1,5 @@
 var fs = require("fs");
 var envs = require('envs');
-
-
 var execSync = require('sync-exec');
 
 var docker_launcher = require('./common/docker_launcher.js');
@@ -26,7 +24,30 @@ var LauncherManager = require("./launcher/launcher.js" );
 // Main Config Loader
 var env = require("./common/config_loader.js");
 
-if( "server" == env.RUN_TYPE || 
+if( "init" == env.RUN_TYPE){
+
+	console.log( "Start initialize" );
+
+	// pull Docker Images
+	var dockerImages = [];
+	for( var idx in env.instances ){
+		var instance = env.instances[idx];
+		dockerImages[ instance.docker_img ] = true;
+	}
+	for( var idx in dockerImages ){
+		console.log( "Pulling :", idx );
+		execSync( "sudo docker pull " + idx );
+	}
+
+	// hosts file change(?)
+	var modifyedHosts = util.getModifyedHosts( env );
+	console.log("Modifyed Hosts ( recommend )", "------------");
+	console.log( modifyedHosts );
+	console.log("-----------------------------------------------");
+
+	// Check setups 
+
+}else if( "server" == env.RUN_TYPE || 
 	"server_only_cmd" == env.RUN_TYPE ){
 
 	// Find Server

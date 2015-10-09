@@ -14,11 +14,8 @@
 			-> 최소 3개 이상의 인스턴스 필요 ( Zookeeper )
 			-> 분리 될 수 있음
 
-		: Spark Master Node
+		: Spark Master & Worker Node
 			-> 일단 Spark는 Stand alon cluster 모드로 설정 한다.
-			-> 최소 3개를 띄운다.
-
-		: Spark Work Node
 			-> 최소 3개를 띄운다.
 
 		: Kafka Node
@@ -89,7 +86,7 @@
 		V : Docker 설치 
 
 	2. Make Sample Script for DockerImage
-		: zookeeper docker image
+		V : zookeeper docker image
 			-> based docker image -> ubuntu 14.04
 				: 참고
 				: https://hub.docker.com/r/mesoscloud/zookeeper/~/dockerfile/
@@ -97,72 +94,22 @@
 				: /etc/zookeeper/conf/myid		-> 호스트 명에 맞게 설정
 				: /etc/zookeeper/conf/zoo.cfg 	-> 서버 리스트 및 IP포트 설정
 				: Zookeeper Start
+		: kafka docker image
+		: spark docker image
+
+	3. Make run module use to node.js
+		: modify [delauncher home]/delauncher/common/config_loader.js
+			-> design for test environment ( servers, ip, process count )
+
+		: node app.js init
+			-> just run
+
+		: modify your /etc/hosts
+			-> ^^
+
+		: node app.js server [server id]
 
 
-
-
-
-
-
-*** 인스턴스 실행기가 도커를 띄울 때 사용하는 옵션들
-
-sudo docker run -i -t --dns=127.0.0.1 35a5e6e6e8e6
-
--d --name=[instance_id]
-
---add-host server_01:127.0.0.1
---add-host server_02:127.0.0.1
-
--v ~/tmp/server_01:/tmp/zookeeper
--v ~/datastreamenv:/opt/delauncher
-
--p 2880:2880
--p 3880:3880
--p 2181:2181
-
--e INSTANCE_ID=zookeeper_1 
--e CONFIG_FILE_PATH=/tmp/de_conf/config.js
--e NODE_PATH
-
-sudo docker run -i -t -h  --add-host server_01:172.17.42.1 --add-host server_02:172.17.42.1 -v ~/tmp/server_01:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_1 35a5e6e6e8e6
-
-------------------------------------------------------------
-	test script
-------------------------------------------------------------
-sudo docker run -d -h server_01 --add-host server_02:172.17.42.1 -v ~/tmp/server_01:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_1 -e CONFIG_FILE_PATH=null -p 2880:2880 -p 3880:3880 -p 2181:2181 fa3d7ef2adce sh /run.sh
-
-sudo docker run -i -t -h server_02 --add-host server_01:172.17.42.1 -v ~/tmp/server_02:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_2 -e CONFIG_FILE_PATH=null -p 2881:2881 -p 3881:3881 -p 2182:2182 fa3d7ef2adce sh /run.sh
-------------------------------------------------------------
-
-------------------------------------------------------------
-	From Docker hub
-------------------------------------------------------------
-sudo docker run -d -h server_01 --add-host server_02:172.17.42.1 -v ~/tmp/server_01:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_1 -e CONFIG_FILE_PATH=null -p 2880:2880 -p 3880:3880 -p 2181:2181 famersbs/zookeeper sh /run.sh
-
-sudo docker run -i -t -h server_02 --add-host server_01:172.17.42.1 -v ~/tmp/server_02:/tmp/zookeeper -v ~/datastreamenv:/opt/delauncher -e INSTANCE_ID=zookeeper_2 -e CONFIG_FILE_PATH=null -p 2881:2881 -p 3881:3881 -p 2182:2182 famersbs/zookeeper sh /run.sh
-------------------------------------------------------------
-
-
-** 이미지 내부에 있는 스크립트 ( 고정 )
-run.sh
-	# node app.js $INSTANCE_ID $CONFIG_FILE_PATH
-
-
-
-!!! dnsmasq 설정 ( docker에서 도메인 처리 할때 사용할 수 있는 방법)
-	!!! 일단은 사용하지 않음 
-apt-get install -y dnsmasq
-
-RUN echo 'address="/dbhost/127.0.0.1"' >> /etc/dnsmasq.d/0hosts
-
-RUN echo 'listen-address=127.0.0.1' >> /etc/dnsmasq.conf
-RUN echo 'resolv-file=/etc/resolv.dnsmasq.conf' >> /etc/dnsmasq.conf
-RUN echo 'conf-dir=/etc/dnsmasq.d' >> /etc/dnsmasq.conf
-RUN echo 'nameserver 8.8.8.8' >> /etc/resolv.dnsmasq.conf
-RUN echo 'nameserver 8.8.4.4' >> /etc/resolv.dnsmasq.conf
-RUN echo 'user=root' >> /etc/dnsmasq.conf
-
-service dnsmasq start
 
 !!! 참고 문헌
 	: http://pyrasis.com/book/DockerForTheReallyImpatient/Chapter13/04

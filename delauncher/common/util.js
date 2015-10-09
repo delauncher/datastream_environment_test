@@ -13,7 +13,7 @@ exports.writeFileSync_overwrrite = function( path, data ){
 };
 
 
-exports.update_Hosts = function( env ){
+exports.getModifyedHosts = function( env ){
 
 	var BEGIN_STR = '########## datastreamenv hosts config ##########';
 	var END_STR = '########## datastreamenv hosts config end ##########';
@@ -40,7 +40,8 @@ exports.update_Hosts = function( env ){
 	hosts = hosts + "\n" + BEGIN_STR + "\n" + addstr + END_STR;
 
 		// write to hosts
-	exports.writeFileSync_overwrrite( '/etc/hosts', hosts );
+	//exports.writeFileSync_overwrrite( '/etc/hosts', hosts );
+	return hosts;
 
 };
 
