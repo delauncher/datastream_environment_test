@@ -8,30 +8,25 @@ You can use your own server or Virtual Box image.
 
 ### Install Docker
 
-	<pre>
 	$ sudo apt-get update
 	$ sudo apt-get install -y docker.io
 
 	$ sudo service docker.io restart
-	</pre>
 
 ### Install Node.js
 
 
-curl -sL https://deb.nodesource.com/setup | sudo bash -
-apt-get install -y build-essential
-apt-get install -y nodejs
+	curl -sL https://deb.nodesource.com/setup | sudo bash -
+	apt-get install -y build-essential
+	apt-get install -y nodejs
 
-'''
 
 ### Check out Node.js Source code
 
-'''
 
-git clone https://github.com/famersbs/datastream_environment_test.git
-cd datastream_environment_test
+	git clone https://github.com/famersbs/datastream_environment_test.git
+	cd datastream_environment_test
 
-'''
 
 ## Initialize environment
 
@@ -39,16 +34,9 @@ cd datastream_environment_test
 
 * init node
 
-'''
-cd delauncher
-sudo node app.js init
-
-'''
+	cd delauncher
+	sudo node app.js init
 
 * run server
 
-'''
-
-sudo node app.js server server01
-
-'''
+	sudo node app.js server server01
