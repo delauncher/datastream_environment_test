@@ -15,18 +15,14 @@ You can use your own server or Virtual Box image.
 
 ### Install Node.js
 
-
 	curl -sL https://deb.nodesource.com/setup | sudo bash -
 	apt-get install -y build-essential
 	apt-get install -y nodejs
 
-
 ### Check out Node.js Source code
-
 
 	git clone https://github.com/famersbs/datastream_environment_test.git
 	cd datastream_environment_test
-
 
 ## Initialize environment
 
