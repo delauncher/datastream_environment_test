@@ -12,6 +12,8 @@ You can use your own server or Virtual Box image.
 	$ sudo apt-get install -y docker.io
 
 	$ sudo service docker.io restart
+	
+	$ sudo sudo docker login   # https://hub.docker.com account
 
 ### Install Node.js
 
