@@ -4,28 +4,35 @@ var exports = module.exports = {
 		servers : [
 			{
 				domain: 'server01',
-				ip: '172.17.42.1',
+				ip: '192.168.104.75',
 				source_path: '~/datastreamenv',
 				datastore_path: '~/tmp',
 				log_path: '~/tmp/logs'
 			},
             {
                 domain: 'server02',
-                ip: '172.17.42.1',
+                ip: '192.168.104.74',
                 source_path: '~/datastreamenv',
 				datastore_path: '~/tmp',
 				log_path: '~/tmp/logs'
             },
             {
                 domain: 'server03',
-                ip: '172.17.42.1',
+                ip: '192.168.104.76',
                 source_path: '~/datastreamenv',
 				datastore_path: '~/tmp',
 				log_path: '~/tmp/logs'
             },
             {
                 domain: 'server04',
-                ip: '172.17.42.1',
+                ip: '192.168.104.82',
+                source_path: '~/datastreamenv',
+				datastore_path: '~/tmp',
+				log_path: '~/tmp/logs'
+            },
+            {
+                domain: 'server05',
+                ip: '192.168.104.80',
                 source_path: '~/datastreamenv',
 				datastore_path: '~/tmp',
 				log_path: '~/tmp/logs'
@@ -141,6 +148,36 @@ var exports = module.exports = {
 	        	masterPort: 7073,
 	        	masterWebPort: 8083,
 	        	workerPort:	9083,
+	        	//workerCount: 1,
+	        	useZookeeper: true,
+	        	//workerMemory:'1g',
+	        	//workerCores:1,
+	        	dataDir: '/tmp/spark'
+	        },
+	        {
+	        	id: 'spark_4',
+	        	type: 'spark',
+	        	target: 'server04',
+	        	docker_img: 'famersbs/spark',
+	        	//docker_img: 'e92cff63ee46',
+	        	masterPort: 7074,
+	        	masterWebPort: 8084,
+	        	workerPort:	9084,
+	        	//workerCount: 1,
+	        	useZookeeper: true,
+	        	//workerMemory:'1g',
+	        	//workerCores:1,
+	        	dataDir: '/tmp/spark'
+	        },
+	        {
+	        	id: 'spark_5',
+	        	type: 'spark',
+	        	target: 'server05',
+	        	docker_img: 'famersbs/spark',
+	        	//docker_img: 'e92cff63ee46',
+	        	masterPort: 7075,
+	        	masterWebPort: 8085,
+	        	workerPort:	9085,
 	        	//workerCount: 1,
 	        	useZookeeper: true,
 	        	//workerMemory:'1g',
