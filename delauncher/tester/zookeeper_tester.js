@@ -29,7 +29,7 @@ exports.test = function( name ){
 	 
 	client.once('connected', function () {
 	    console.log('Connected to ZooKeeper.');
-	    listChildren(client, "/spark/master_status");
+	    listChildren(client, "/");
 	});
 	 
 	client.connect();

@@ -13,13 +13,15 @@ RUN apt-get install -y autoconf libtool
 # Install other Mesos dependencies.
 RUN apt-get -y install build-essential python-dev python-boto libcurl4-nss-dev libsasl2-dev maven libapr1-dev libsvn-dev
 
+RUN apt-get -y install wget
+
 
 # download mesos
 WORKDIR /opt
 
 RUN wget http://www.apache.org/dist/mesos/0.25.0/mesos-0.25.0.tar.gz
 RUN tar -zxf /opt/mesos-0.25.0.tar.gz
-RUM mv ./mesos-0.25.0 ./mesos
+RUN mv ./mesos-0.25.0 ./mesos
 
 RUN mkdir ./mesos/build
 

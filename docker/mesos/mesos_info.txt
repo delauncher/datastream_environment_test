@@ -17,6 +17,11 @@ mesos
 		export SPARK_EXECUTOR_URI=http://apache.arvixe.com/spark/spark-1.5.1/spark-1.5.1-bin-hadoop2.6.tgz
 
 
+
+	!! if you want to run mesos-slafe you should add this option in docker parameter
+		: sudo docker run -i -t --net=host --privileged 7b5ae04e2d5d 
+
+
 -----
 - Home env
 
