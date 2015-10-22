@@ -6,7 +6,8 @@ var DockerLauncher = function(){
 		hosts: [],
 		volumes: [],
 		portforward: [],
-		envvar:[]
+		envvar:[],
+		extraopt:""
 	};
 };
 
@@ -45,6 +46,9 @@ DockerLauncher.prototype = {
 	addEnvValue: function( id, value ){
 		this._options.envvar.push( {id:id, value:value } );
 	},
+	addExtraParam: function( option ){
+		this._options.extraopt = this._options.extraopt + option + " ";
+	},
 	
 	getExecuteCmd: function(){
 		var command = " sudo docker run -d ";
@@ -73,7 +77,7 @@ DockerLauncher.prototype = {
 			command = command + " -e " + env.id + '=' + env.value + ' ';
 		}
 
-		command = command + " " + options.imagepath + " " + options.cmd;
+		command = command + " " + options.extraopt + " " + options.imagepath + " " + options.cmd;
 
 		if( undefined != options.logpath && null != options.logpath ){
 			command = command + " >> " + options.logpath + " ";

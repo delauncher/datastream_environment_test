@@ -29,3 +29,7 @@ WORKDIR /opt/mesos/build
 
 RUN ../configure
 RUN make
+
+# copy run script
+WORKDIR /
+ADD run.sh run.sh

@@ -1,42 +1,88 @@
 var envs = require('envs');
 
 var exports = module.exports = {
+
+		server_groups : [
+			{
+				name:"allservers",
+				servers:[
+					'server01',
+					'server02',
+					'server03',
+					'server01.mesos.master',
+					'server02.mesos.master',
+					'server03.mesos.master',
+					'server01.mesos.slave01',
+					'server02.mesos.slave01',
+					'server03.mesos.slave01'
+				]
+			}
+		],
 		servers : [
+
 			{
 				domain: 'server01',
-				ip: '192.168.104.75',
+				ip: '10.0.0.205',
 				source_path: '~/datastreamenv',
 				datastore_path: '~/tmp',
 				log_path: '~/tmp/logs'
 			},
-            {
-                domain: 'server02',
-                ip: '192.168.104.74',
-                source_path: '~/datastreamenv',
+			{
+				domain: 'server01.mesos.master',
+				ip: '10.0.0.205',
+				source_path: '~/datastreamenv',
 				datastore_path: '~/tmp',
 				log_path: '~/tmp/logs'
-            },
-            {
-                domain: 'server03',
-                ip: '192.168.104.76',
-                source_path: '~/datastreamenv',
+			},
+			{
+				domain: 'server01.mesos.slave01',
+				ip: '10.0.0.205',
+				source_path: '~/datastreamenv',
 				datastore_path: '~/tmp',
 				log_path: '~/tmp/logs'
-            },
-            {
-                domain: 'server04',
-                ip: '192.168.104.82',
-                source_path: '~/datastreamenv',
+			},
+			{
+				domain: 'server02',
+				ip: '10.0.0.205',
+				source_path: '~/datastreamenv',
 				datastore_path: '~/tmp',
 				log_path: '~/tmp/logs'
-            },
-            {
-                domain: 'server05',
-                ip: '192.168.104.80',
-                source_path: '~/datastreamenv',
+			},
+			{
+				domain: 'server02.mesos.master',
+				ip: '10.0.0.205',
+				source_path: '~/datastreamenv',
 				datastore_path: '~/tmp',
 				log_path: '~/tmp/logs'
-            },
+			},
+			{
+				domain: 'server02.mesos.slave01',
+				ip: '10.0.0.205',
+				source_path: '~/datastreamenv',
+				datastore_path: '~/tmp',
+				log_path: '~/tmp/logs'
+			},
+			{
+				domain: 'server03',
+				ip: '10.0.0.205',
+				source_path: '~/datastreamenv',
+				datastore_path: '~/tmp',
+				log_path: '~/tmp/logs'
+			},
+			{
+				domain: 'server03.mesos.master',
+				ip: '10.0.0.205',
+				source_path: '~/datastreamenv',
+				datastore_path: '~/tmp',
+				log_path: '~/tmp/logs'
+			},
+			{
+				domain: 'server03.mesos.slave01',
+				ip: '10.0.0.205',
+				source_path: '~/datastreamenv',
+				datastore_path: '~/tmp',
+				log_path: '~/tmp/logs'
+			},
 
 		],
 		instances : [
@@ -79,6 +125,66 @@ var exports = module.exports = {
                     clientPort:2183
             	}
 	        },
+	        {
+                id: 'mesos-master-1',
+                type: 'mesos-master',
+                target: 'server01.mesos.master',
+                docker_img: 'f32b082e5311',
+				quorum:2,
+				cluster:'mesos-test-set',
+                dataDir: '/tmp/mesos-master',
+                port:5050
+	        },
+	        {
+                id: 'mesos-master-2',
+                type: 'mesos-master',
+                target: 'server02.mesos.master',
+                docker_img: 'f32b082e5311',
+				quorum:2,
+				cluster:'mesos-test-set',
+                dataDir: '/tmp/mesos-master',
+                port:5051
+	        },
+	        {
+                id: 'mesos-master-3',
+                type: 'mesos-master',
+                target: 'server03.mesos.master',
+                docker_img: 'f32b082e5311',
+				quorum:2,
+				cluster:'mesos-test-set',
+                dataDir: '/tmp/mesos-master',
+                port:5052
+	        },
+
+	        {
+                id: 'mesos-slave-1',
+                type: 'mesos-slave',
+                target: 'server01.mesos.slave01',
+                docker_img: 'f32b082e5311',
+                dataDir: '/tmp/mesos-master',
+                port:5060
+	        },
+
+	        {
+                id: 'mesos-slave-2',
+                type: 'mesos-slave',
+                target: 'server02.mesos.slave01',
+                docker_img: 'f32b082e5311',
+                dataDir: '/tmp/mesos-master',
+                port:5061
+	        },
+
+	        {
+                id: 'mesos-slave-3',
+                type: 'mesos-slave',
+                target: 'server03.mesos.slave01',
+                docker_img: 'f32b082e5311',
+                dataDir: '/tmp/mesos-master',
+                port:5062
+	        },
+
+	        //f32b082e5311
+	        /*
 	        {
 	        	id: 'kafka_1',
 	        	type: 'kafka',
@@ -184,6 +290,7 @@ var exports = module.exports = {
 	        	//workerCores:1,
 	        	dataDir: '/tmp/spark'
 	        },
+	        */
 		],
 		
 	};
@@ -210,3 +317,16 @@ exports.instances.filter = function( _instances ){
 		return ret;
 	};
 }( exports.instances );
+
+exports.server_groups.getGroupByname = function( _groups ){
+	return function( name ){
+
+		for( var i = 0 ; i < _groups.length ; ++ i ){
+			if( _groups[i].name == name ){
+				return _groups[i].servers;
+			}
+		}
+		return null;
+
+	};
+}( exports.server_groups );
