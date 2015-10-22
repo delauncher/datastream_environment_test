@@ -1,0 +1,25 @@
+mesos
+
+	-mesos install
+
+		http://mesos.apache.org/gettingstarted/
+
+		!! if when you build mesos you saw the message what "can't found jni.h" , you can run that cme
+			: 	$ sudo aptitude install openjdk-7-source
+				$ sudo updatedb
+				$ locate jni.h
+				$ /usr/lib/jvm/java-7-openjdk-amd64/include/jni.h
+
+
+
+		export MESOS_NATIVE_JAVA_LIBRARY=/home/datastreamenv/mesos/mesos-0.25.0/build/src/.libs/libmesos.so
+
+		export SPARK_EXECUTOR_URI=http://apache.arvixe.com/spark/spark-1.5.1/spark-1.5.1-bin-hadoop2.6.tgz
+
+
+-----
+- Home env
+
+	10.0.0.4
+	10.0.0.99
+	
